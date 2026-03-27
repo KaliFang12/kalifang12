@@ -14,6 +14,22 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+    {
+    slug: "northlight-travel",
+    title: "SLAM: Autonomous Robot Navigation System",
+    shortDescription:
+      "A SLAM-based navigation system for autonomous robots, enabling real-time mapping and localization in dynamic environments.",
+    details:
+      "The SLAM: Autonomous Robot Navigation System is designed to provide robust and efficient navigation capabilities for autonomous robots. It utilizes Simultaneous Localization and Mapping (SLAM) techniques to create accurate maps of the environment while keeping track of the robot's position. This system is ideal for applications such as warehouse automation, delivery robots, and exploration in unknown terrains.",
+    thumbnail:
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=900&q=70",
+    image:
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1600&q=80",
+    links: [
+      { label: "GitHub", url: "https://github.com/" },
+      { label: "Live Demo", url: "https://example.com/" },
+    ],
+  },
   {
     slug: "lumen-commerce",
     title: "Accurate Blood Pressure Monitor",
@@ -38,9 +54,9 @@ export const projects: Project[] = [
     details:
       "The 4 DOF Robotic Arm is a versatile mechanical system capable of performing complex tasks with high precision. It features advanced control algorithms and a user-friendly interface for seamless operation.",
     thumbnail:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=70",
+      "/4DOF.jpg",
     image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80",
+      "/4DOF.jpg",
     links: [
       { label: "GitHub", url: "https://github.com/" },
       { label: "Case Study", url: "https://example.com/" },
@@ -54,9 +70,9 @@ export const projects: Project[] = [
     details:
       "The Autonomous Maze Navigation Robot is a cutting-edge solution for exploring and mapping unknown environments. It utilizes state-of-the-art sensor fusion and machine learning algorithms to achieve real-time navigation and obstacle avoidance.",
     thumbnail:
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=70",
+      "/RBE2002.jpg",
     image:
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1600&q=80",
+      "/RBE2002.jpg",
     links: [
       { label: "GitHub", url: "https://github.com/" },
       { label: "Live Demo", url: "https://example.com/" },
@@ -64,15 +80,15 @@ export const projects: Project[] = [
   },
   {
     slug: "pulse-fit",
-    title: "Pulse Fit",
+    title: "Robotic linkage system",
     shortDescription:
       "A health and wellness platform blending coaching insights with meaningful progress tracking.",
     details:
       "Pulse Fit helps users build consistent habits through tailored plans, progress milestones, and in-app coaching. The project balanced clean visuals with motivating micro-interactions to improve retention and daily engagement.",
     thumbnail:
-      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=70",
+      "/RBE2001.jpg",
     image:
-      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1600&q=80",
+      "/RBE2001.jpg",
     links: [
       { label: "GitHub", url: "https://github.com/" },
       { label: "App Preview", url: "https://example.com/" },
@@ -92,22 +108,6 @@ export const projects: Project[] = [
     links: [
       { label: "GitHub", url: "https://github.com/" },
       { label: "Case Study", url: "https://example.com/" },
-    ],
-  },
-  {
-    slug: "northlight-travel",
-    title: "Northlight Travel",
-    shortDescription:
-      "An immersive itinerary builder that simplifies trip planning from inspiration to booking.",
-    details:
-      "Northlight Travel helps users create personalized routes, save destination ideas, and coordinate plans with friends. The experience combines rich visuals and practical planning tools while staying lightweight and mobile-friendly.",
-    thumbnail:
-      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=900&q=70",
-    image:
-      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1600&q=80",
-    links: [
-      { label: "GitHub", url: "https://github.com/" },
-      { label: "Live Demo", url: "https://example.com/" },
     ],
   },
 ];

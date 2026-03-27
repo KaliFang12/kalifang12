@@ -7,7 +7,10 @@ export const EASING = {
   easeInOut: [0.4, 0, 0.2, 1],
 } as const;
 
-export const useReducedMotion = () => useFramerReducedMotion();
+export const useReducedMotion = () => {
+  const reducedMotion = useFramerReducedMotion();
+  return reducedMotion ?? false;
+};
 
 export function getSafeDuration(duration: number, prefersReducedMotion?: boolean) {
   return prefersReducedMotion ? 0.1 : duration;
