@@ -320,20 +320,38 @@ function ProjectPage() {
           <h2>Demo Video</h2>
           <div className="project-detail__media-wrap">
             {project.slug === "autonomous-maze-navigation-robot" ? (
-              <video controls className="project-detail__video">
-                <source src="/RBE2002-vid-no-audio.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+              <div className="video-container">
+                <iframe
+                  className="project-detail__video"
+                  src="https://www.youtube.com/embed/pE_0GdaZ4dg"
+                  title="RBE2002 Demo Video"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
             ) : project.slug === "4dof-robotic-arm" ? (
-              <video controls className="project-detail__video">
-                <source src="/RBE-3001-vid.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+              <div className="video-container">
+                <iframe
+                  className="project-detail__video"
+                  src="https://www.youtube.com/embed/2nHPzWCtcVw"
+                  title="RBE3001 Demo Video"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
             ) : project.slug === "robotic-linkage-system" ? (
-              <video controls className="project-detail__video">
-                <source src="/RBE2001-vid.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+              <div className="video-container">
+                <iframe
+                  className="project-detail__video"
+                  src="https://www.youtube.com/embed/LxkrFmDtD2k"
+                  title="RBE2001 Demo Video"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
             ): (
               <div className="placeholder-video">
                 <p>Project demo video will be embedded here</p>
