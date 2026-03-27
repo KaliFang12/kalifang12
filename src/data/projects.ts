@@ -16,9 +16,9 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "lumen-commerce",
-    title: "Lumen Commerce",
+    title: "Accurate Blood Pressure Monitor",
     shortDescription:
-      "A minimalist storefront system focused on swift checkout and frictionless product discovery.",
+      "Designed and implemented a blood pressure monitoring system that delivers clinical-grade accuracy in a compact, user-friendly device.",
     details:
       "Lumen Commerce is a performance-first e-commerce experience with streamlined browsing, predictive search, and a conversion-optimized checkout flow. I handled product architecture, design system implementation, and frontend performance tuning.",
     thumbnail:
@@ -32,11 +32,11 @@ export const projects: Project[] = [
   },
   {
     slug: "aero-analytics",
-    title: "Aero Analytics",
+    title: "4 DOF Robotic Arm",
     shortDescription:
-      "A data dashboard that turns complex business metrics into clear visual narratives.",
+      "A robotic arm with four degrees of freedom, designed for precise manipulation and control.",
     details:
-      "Aero Analytics provides real-time KPI tracking with modular chart blocks and context-aware filtering. The interface prioritizes legibility and efficient workflows, making it easy for teams to identify trends and act quickly.",
+      "The 4 DOF Robotic Arm is a versatile mechanical system capable of performing complex tasks with high precision. It features advanced control algorithms and a user-friendly interface for seamless operation.",
     thumbnail:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=70",
     image:
@@ -48,11 +48,11 @@ export const projects: Project[] = [
   },
   {
     slug: "quiet-journal",
-    title: "Quiet Journal",
+    title: "Autonomous Maze Navigation Robot",
     shortDescription:
-      "A calm writing app designed around intentional reflection and distraction-free sessions.",
+      "An autonomous robot designed to navigate complex mazes using advanced sensors and algorithms.",
     details:
-      "Quiet Journal offers a serene writing environment with adaptive prompts, mood tracking, and multi-device sync. I focused on interaction details, typographic rhythm, and accessibility to keep writing effortless and inclusive.",
+      "The Autonomous Maze Navigation Robot is a cutting-edge solution for exploring and mapping unknown environments. It utilizes state-of-the-art sensor fusion and machine learning algorithms to achieve real-time navigation and obstacle avoidance.",
     thumbnail:
       "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=70",
     image:

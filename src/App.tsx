@@ -25,13 +25,18 @@ function HomePage() {
         variants={slowReveal(prefersReducedMotion)}
       >
         <div className="hero__inner">
-          <p className="hero__eyebrow">Portfolio</p>
-          <h1 className="hero__title">Kali Fang</h1>
-          <p className="hero__about">
-            I design and build thoughtful digital experiences with a strong focus on
-            clarity, performance, and detail. My work balances visual polish with
-            practical user-centered problem solving.
-          </p>
+          <div className="hero__photo-wrapper">
+            <div className="hero__photo"></div>
+          </div>
+          <div className="hero__content">
+            <p className="hero__eyebrow">Portfolio</p>
+            <h1 className="hero__title">Kali Fang</h1>
+            <p className="hero__about">
+              I'm a Senior Mechanical Engineering student graduating in May 2026 at Worcester Polytechnic 
+              Institute (WPI) with a minor in Robotics Engineering. I have experience in software development, 
+              robotics, and mechanical design. Check out my projects below!
+            </p>
+          </div>
         </div>
       </motion.header>
 
@@ -52,7 +57,7 @@ function HomePage() {
             whileInView="visible"
             viewport={inViewOnce}
           >
-            <h2 id="projects-title">Selected Projects</h2>
+            <h2 id="projects-title">Projects</h2>
             <p>Six projects with concise overviews and deeper case-study details.</p>
           </motion.div>
 
