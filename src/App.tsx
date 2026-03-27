@@ -118,7 +118,7 @@ function HomePage() {
             viewport={inViewOnce}
           >
             <h2 id="projects-title">Projects</h2>
-            <p>My work spans mechanical design, embedded electronics, and automation!</p>
+            <p>I worked with teams throughout these projects to deliver creative projects, demonstrated below. Each project was developed through its full life cycle.</p>
           </motion.div>
 
           <motion.div
