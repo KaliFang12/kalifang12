@@ -26,12 +26,20 @@ function Navigation() {
           Home
         </MotionLink>
         <MotionLink
-          to="/other"
+          to="/resume"
           className="nav__link"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          Other
+          Resume
+        </MotionLink>
+        <MotionLink
+          to="/about"
+          className="nav__link"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          About Me
         </MotionLink>
       </div>
     </nav>
@@ -110,7 +118,7 @@ function HomePage() {
             viewport={inViewOnce}
           >
             <h2 id="projects-title">Projects</h2>
-            <p>Six projects with concise overviews and deeper case-study details.</p>
+            <p>My work spans mechanical design, embedded electronics, and automation!</p>
           </motion.div>
 
           <motion.div
@@ -131,6 +139,9 @@ function HomePage() {
                 transition={{ duration: prefersReducedMotion ? 0.1 : 0.6, ease: EASING.default }}
                 aria-label={`Open dedicated page for ${project.title}`}
               >
+                {(project.slug === "slam-robot-navigation" || project.slug === "blood-pressure-monitor") && (
+                  <div className="project-card__badge">In Progress</div>
+                )}
                 <img
                   className="project-card__image"
                   src={project.thumbnail}
@@ -167,66 +178,61 @@ function OtherPage() {
           <Link className="back-link" to="/">
             ← Back to home
           </Link>
-          
-          {/* Topic Section */}
+
+          <h1 className="about-title">About Me</h1>
+
+          {/* Image Locations Section */}
           <section className="content-section">
-            <h2>Topic Section</h2>
-            {/* 
-              TOPIC SECTION TEMPLATE:
-              This section should introduce the main topic or theme of your content.
-              Include:
-              - A compelling hook or introduction
-              - Background context
-              - Main thesis or objective
-              - What readers can expect to learn
-            */}
-            <div className="placeholder-content">
-              <p><em>[Topic content goes here - introduce your main subject]</em></p>
+            <h2>Hobbies</h2>
+            <div className="image-locations-grid">
+              <div className="image-location-item">
+                <img src="/billiards.jpg" alt="Billiards" className="location-photo" />
+                <h3>Billiards</h3>
+                <p>Fun with friends</p>
+              </div>
+              <div className="image-location-item">
+                <img src="/rock-climbing.jpg" alt="Rock Climbing" className="location-photo" />
+                <h3>Rock Climbing</h3>
+                <p>Exploring the outdoors</p>
+              </div>
+              <div className="image-location-item">
+                <img src="/snowboarding.jpg" alt="Snowboarding" className="location-photo" />
+                <h3>Snowboarding</h3>
+                <p>Winter adventures</p>
+              </div>
             </div>
           </section>
 
-          {/* Body Section */}
-          <section className="content-section">
-            <h2>Body Section</h2>
-            {/* 
-              BODY SECTION TEMPLATE:
-              This is the main content area where you develop your ideas.
-              Structure your body with:
-              - Multiple subsections for different aspects
-              - Supporting evidence, examples, or data
-              - Analysis and explanations
-              - Visual elements (images, diagrams, etc.)
-              - Clear transitions between ideas
-            */}
-            <div className="placeholder-content">
-              <p><em>[Body content goes here - develop your main ideas and arguments]</em></p>
-              
-              <h3>Subsection 1</h3>
-              <p><em>[First major point or aspect]</em></p>
-              
-              <h3>Subsection 2</h3>
-              <p><em>[Second major point or aspect]</em></p>
-              
-              <h3>Subsection 3</h3>
-              <p><em>[Third major point or aspect]</em></p>
-            </div>
-          </section>
+        </motion.div>
+      </main>
+      <ContactBar />
+    </>
+  );
+}
 
-          {/* Conclusion Section */}
+function ResumePage() {
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
+    <>
+      <Navigation />
+      <main className="other-page">
+        <motion.div
+          className="other-content"
+          variants={fadeUp(prefersReducedMotion)}
+          initial="hidden"
+          animate="visible"
+        >
+          <Link className="back-link" to="/">
+            ← Back to home
+          </Link>
+
+          <h1 className="about-title">Resume</h1>
+
+          {/* Resume Section */}
           <section className="content-section">
-            <h2>Conclusion Section</h2>
-            {/* 
-              CONCLUSION SECTION TEMPLATE:
-              Wrap up your content and leave a lasting impression.
-              Include:
-              - Summary of key points
-              - Restatement of main thesis/objective
-              - Final thoughts or implications
-              - Call to action or next steps
-              - Memorable closing statement
-            */}
-            <div className="placeholder-content">
-              <p><em>[Conclusion content goes here - summarize and wrap up your content]</em></p>
+            <div className="resume-container">
+              <embed src="/kali-fang-resume.pdf" type="application/pdf" className="resume-image" />
             </div>
           </section>
         </motion.div>
@@ -258,21 +264,54 @@ function ProjectPage() {
         </Link>
         <p className="hero__eyebrow">Project</p>
         <h1 className="project-detail__title">{project.title}</h1>
-        <p className="project-detail__description">{project.details}</p>
-        
+
+        {/* Topics Section (directly under title) */}
+        <section className="project-topics">
+          <h2>Concepts</h2>
+          <div className="topics-container">
+            {project.topics.map((topic) => (
+              <span key={topic} className="topic-bubble">
+                {topic}
+              </span>
+            ))}
+          </div>
+        </section>
+
         <div className="project-detail__media-wrap">
           <img className="project-detail__image" src={project.image} alt={`${project.title} detailed preview`} />
+        </div>
+
+        {/* Render each paragraph separately for the details text */}
+        <div className="project-detail__description-wrap">
+          {project.details.split("\n\n").map((paragraph, index) => (
+            <p key={index} className="project-detail__description">
+              {paragraph.trim()}
+            </p>
+          ))}
         </div>
 
         {/* Additional Image Section */}
         <section className="project-section">
           <h2>Additional Images</h2>
           <div className="project-detail__media-wrap">
-            <div className="placeholder-image">
-              <p>Additional project image will be imported here</p>
-              {/* TODO: Replace with actual image import */}
-              {/* <img src="/path-to-additional-image.jpg" alt="Additional project image" /> */}
-            </div>
+            {project.slug === "blood-pressure-monitor" ? (
+              <div className="additional-images-grid">
+                <img src="/MQP-test1.jpg" alt="MQP Test 1" className="additional-image" />
+                <img src="/MQP-self-test.jpg" alt="MQP Self Test" className="additional-image" />
+              </div>
+            ) : project.slug === "autonomous-maze-navigation-robot" ? (
+              <div className="additional-images-grid">
+                <img src="/RBE2002.jpg" alt="RBE2002 Robot" className="additional-image" />
+              </div>
+            ) : project.slug === "robotic-linkage-system" ? (
+              <div className="additional-images-grid">
+                <img src="/RBE2001.jpg" alt="RBE2001 Linkage System" className="additional-image" />
+              </div>
+            ) : (
+              <div className="placeholder-image">
+                <p>Additional project images will be imported here</p>
+              </div>
+            )}
           </div>
         </section>
 
@@ -280,24 +319,35 @@ function ProjectPage() {
         <section className="project-section">
           <h2>Demo Video</h2>
           <div className="project-detail__media-wrap">
-            <div className="placeholder-video">
-              <p>Project demo video will be embedded here</p>
-              {/* TODO: Replace with actual video embed */}
-              {/* <video controls>
-                <source src="/path-to-demo-video.mp4" type="video/mp4" />
+            {project.slug === "autonomous-maze-navigation-robot" ? (
+              <video controls className="project-detail__video">
+                <source src="/RBE2002-vid-no-audio.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
-              </video> */}
-            </div>
+              </video>
+            ) : project.slug === "4dof-robotic-arm" ? (
+              <video controls className="project-detail__video">
+                <source src="/RBE-3001-vid.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            ) : project.slug === "robotic-linkage-system" ? (
+              <video controls className="project-detail__video">
+                <source src="/RBE2001-vid.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            ): (
+              <div className="placeholder-video">
+                <p>Project demo video will be embedded here</p>
+              </div>
+            )}
+          </div>
+          <div className="video-links">
+            {project.links.map((link) => (
+              <a key={`${project.title}-${link.label}`} href={link.url} target="_blank" rel="noreferrer noopener" className="video-link">
+                {link.label}
+              </a>
+            ))}
           </div>
         </section>
-
-        <div className="modal__links">
-          {project.links.map((link) => (
-            <a key={`${project.title}-${link.label}`} href={link.url} target="_blank" rel="noreferrer noopener">
-              {link.label}
-            </a>
-          ))}
-        </div>
       </motion.div>
     </main>
   );
@@ -308,7 +358,8 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/other" element={<OtherPage />} />
+        <Route path="/resume" element={<ResumePage />} />
+        <Route path="/about" element={<OtherPage />} />
         <Route path="/projects/:slug" element={<ProjectPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
