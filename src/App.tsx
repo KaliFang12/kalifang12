@@ -301,13 +301,22 @@ function ProjectPage() {
                 <img src={asset("MQP-test1.jpg")} alt="MQP Test 1" className="additional-image" />
                 <img src={asset("MQP-self-test.jpg")} alt="MQP Self Test" className="additional-image" />
               </div>
+            ) : project.slug === "4dof-robotic-arm" ? (
+              <div className="additional-images-grid">
+                <img src={asset("kinematics.jpg")} alt="Kinematics" className="additional-image" />
+                <img src={asset("matlab-filter.jpg")} alt="MATLAB Filter" className="additional-image" />
+                <img src={asset("funny-graph.jpg")} alt="Funny Graph" className="additional-image" />
+                <img src={asset("robot-workspace.jpg")} alt="Robot Workspace" className="additional-image" />
+              </div>
             ) : project.slug === "autonomous-maze-navigation-robot" ? (
               <div className="additional-images-grid">
-                <img src={asset("RBE2002.jpg")} alt="RBE2002 Robot" className="additional-image" />
+                <img src={asset("romi.jpg")} alt="Pololu Romi" className="additional-image" />
+                <img src={asset("esp32.jpg")} alt="ESP32" className="additional-image" />
               </div>
             ) : project.slug === "robotic-linkage-system" ? (
               <div className="additional-images-grid">
                 <img src={asset("RBE2001.jpg")} alt="RBE2001 Linkage System" className="additional-image" />
+                <img src={asset("CAD.jpg")} alt="CAD Model" className="additional-image" />
               </div>
             ) : (
               <div className="placeholder-image">
