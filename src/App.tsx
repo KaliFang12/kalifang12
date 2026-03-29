@@ -13,6 +13,8 @@ import {
 
 const MotionLink = motion(Link);
 
+const asset = (name: string) => `${import.meta.env.BASE_URL}${name}`;
+
 function Navigation() {
   return (
     <nav className="nav">
@@ -84,7 +86,7 @@ function HomePage() {
           <div className="hero__photo-wrapper">
             <img
               className="hero__photo"
-              src="/Myself.jpg"
+              src={asset("Myself.jpg")}
               alt="Kali Fang - Profile Photo"
             />
           </div>
@@ -118,7 +120,7 @@ function HomePage() {
             viewport={inViewOnce}
           >
             <h2 id="projects-title">Projects</h2>
-            <p>I worked with teams throughout these projects to deliver creative projects, demonstrated below. Each project was developed through its full life cycle.</p>
+            <p>Across my projects I've worked with embedded systems, robot kinematics, control algorithms, signal processing, mechanical design, and full-stack development</p>
           </motion.div>
 
           <motion.div
@@ -144,7 +146,7 @@ function HomePage() {
                 )}
                 <img
                   className="project-card__image"
-                  src={project.thumbnail}
+                  src={asset(project.thumbnail)}
                   alt={`${project.title} preview image`}
                   loading="lazy"
                 />
@@ -186,19 +188,19 @@ function OtherPage() {
             <h2>Hobbies</h2>
             <div className="image-locations-grid">
               <div className="image-location-item">
-                <img src="/billiards.jpg" alt="Billiards" className="location-photo" />
+                <img src={asset("billiards.jpg")} alt="Billiards" className="location-photo" />
                 <h3>Billiards</h3>
-                <p>Fun with friends</p>
+                <p></p>
               </div>
               <div className="image-location-item">
-                <img src="/rock-climbing.jpg" alt="Rock Climbing" className="location-photo" />
+                <img src={asset("rock-climbing.jpg")} alt="Rock Climbing" className="location-photo" />
                 <h3>Rock Climbing</h3>
-                <p>Exploring the outdoors</p>
+                <p></p>
               </div>
               <div className="image-location-item">
-                <img src="/snowboarding.jpg" alt="Snowboarding" className="location-photo" />
+                <img src={asset("snowboarding.jpg")} alt="Snowboarding" className="location-photo" />
                 <h3>Snowboarding</h3>
-                <p>Winter adventures</p>
+                <p></p>
               </div>
             </div>
           </section>
@@ -232,7 +234,7 @@ function ResumePage() {
           {/* Resume Section */}
           <section className="content-section">
             <div className="resume-container">
-              <embed src="/kali-fang-resume.pdf" type="application/pdf" className="resume-image" />
+              <embed src={asset("kali-fang-resume.pdf")} type="application/pdf" className="resume-image" />
             </div>
           </section>
         </motion.div>
@@ -278,7 +280,7 @@ function ProjectPage() {
         </section>
 
         <div className="project-detail__media-wrap">
-          <img className="project-detail__image" src={project.image} alt={`${project.title} detailed preview`} />
+          <img className="project-detail__image" src={asset(project.image)} alt={`${project.title} detailed preview`} />
         </div>
 
         {/* Render each paragraph separately for the details text */}
@@ -296,16 +298,16 @@ function ProjectPage() {
           <div className="project-detail__media-wrap">
             {project.slug === "blood-pressure-monitor" ? (
               <div className="additional-images-grid">
-                <img src="/MQP-test1.jpg" alt="MQP Test 1" className="additional-image" />
-                <img src="/MQP-self-test.jpg" alt="MQP Self Test" className="additional-image" />
+                <img src={asset("MQP-test1.jpg")} alt="MQP Test 1" className="additional-image" />
+                <img src={asset("MQP-self-test.jpg")} alt="MQP Self Test" className="additional-image" />
               </div>
             ) : project.slug === "autonomous-maze-navigation-robot" ? (
               <div className="additional-images-grid">
-                <img src="/RBE2002.jpg" alt="RBE2002 Robot" className="additional-image" />
+                <img src={asset("RBE2002.jpg")} alt="RBE2002 Robot" className="additional-image" />
               </div>
             ) : project.slug === "robotic-linkage-system" ? (
               <div className="additional-images-grid">
-                <img src="/RBE2001.jpg" alt="RBE2001 Linkage System" className="additional-image" />
+                <img src={asset("RBE2001.jpg")} alt="RBE2001 Linkage System" className="additional-image" />
               </div>
             ) : (
               <div className="placeholder-image">
@@ -373,7 +375,7 @@ function ProjectPage() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/kalifang12/">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/resume" element={<ResumePage />} />
