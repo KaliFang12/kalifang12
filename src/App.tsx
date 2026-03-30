@@ -202,6 +202,11 @@ function OtherPage() {
                 <h3>Snowboarding</h3>
                 <p></p>
               </div>
+              <div className="image-location-item">
+                <img src={asset("cooking-preview.jpg")} alt="Cooking" className="location-photo" />
+                <h3>Cooking</h3>
+                <p></p>
+              </div>
             </div>
           </section>
 
