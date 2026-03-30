@@ -198,13 +198,13 @@ function OtherPage() {
                 <p></p>
               </div>
               <div className="image-location-item">
-                <img src={asset("snowboarding.jpg")} alt="Snowboarding" className="location-photo" />
-                <h3>Snowboarding</h3>
+                <img src={asset("cooking-preview.jpg")} alt="Cooking" className="location-photo" />
+                <h3>Cooking</h3>
                 <p></p>
               </div>
               <div className="image-location-item">
-                <img src={asset("cooking-preview.jpg")} alt="Cooking" className="location-photo" />
-                <h3>Cooking</h3>
+                <img src={asset("snowboarding.jpg")} alt="Snowboarding" className="location-photo" />
+                <h3>Snowboarding</h3>
                 <p></p>
               </div>
             </div>
