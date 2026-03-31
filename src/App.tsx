@@ -28,6 +28,14 @@ function Navigation() {
           Home
         </MotionLink>
         <MotionLink
+          to="/projects"
+          className="nav__link"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Projects
+        </MotionLink>
+        <MotionLink
           to="/resume"
           className="nav__link"
           whileHover={{ scale: 1.05 }}
@@ -73,6 +81,11 @@ function ContactBar() {
 function HomePage() {
   const prefersReducedMotion = useReducedMotion();
 
+  const featuredProjects = projects.filter((project) => project.featured);
+  const allSkills = Array.from(
+    new Set(projects.flatMap((project) => project.topics.map((topic) => topic.trim())))
+  );
+
   return (
     <>
       <Navigation />
@@ -104,6 +117,45 @@ function HomePage() {
 
       <main>
         <motion.section
+          className="skills"
+          id="skills"
+          aria-labelledby="skills-title"
+          variants={fadeIn(prefersReducedMotion)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={inViewOnce}
+        >
+          <motion.div
+            className="section-heading"
+            variants={fadeUp(prefersReducedMotion)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={inViewOnce}
+          >
+            <h2 id="skills-title">Technical Skills</h2>
+            <p>Extracted from project concept tags across all projects.</p>
+          </motion.div>
+
+          <motion.div
+            className="skills-grid"
+            variants={staggerContainerFast(prefersReducedMotion)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={inViewOnce}
+          >
+            {allSkills.map((skill) => (
+              <motion.span
+                key={skill}
+                className="topic-bubble"
+                variants={fadeUp(prefersReducedMotion)}
+              >
+                {skill}
+              </motion.span>
+            ))}
+          </motion.div>
+        </motion.section>
+
+        <motion.section
           className="projects"
           id="projects"
           aria-labelledby="projects-title"
@@ -119,8 +171,81 @@ function HomePage() {
             whileInView="visible"
             viewport={inViewOnce}
           >
-            <h2 id="projects-title">Projects</h2>
-            <p>Across my projects I've worked with embedded systems, robot kinematics, control algorithms, signal processing, mechanical design, and full-stack development</p>
+            <h2 id="projects-title">Featured Projects</h2>
+            <p>Most impressive work, dynamically controlled by project data flags.</p>
+          </motion.div>
+
+          <motion.div
+            className="project-grid"
+            variants={staggerContainerFast(prefersReducedMotion)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={inViewOnce}
+          >
+            {featuredProjects.map((project) => (
+              <MotionLink
+                key={project.slug}
+                to={`/projects/${project.slug}`}
+                className="project-card"
+                variants={fadeUp(prefersReducedMotion)}
+                whileHover={{ y: prefersReducedMotion ? 0 : -5 }}
+                whileTap={{ scale: prefersReducedMotion ? 1 : 0.99 }}
+                transition={{ duration: prefersReducedMotion ? 0.1 : 0.6, ease: EASING.default }}
+                aria-label={`Open dedicated page for ${project.title}`}
+              >
+                {(project.slug === "slam-robot-navigation" || project.slug === "blood-pressure-monitor") && (
+                  <div className="project-card__badge">In Progress</div>
+                )}
+                <img
+                  className="project-card__image"
+                  src={asset(project.thumbnail)}
+                  alt={`${project.title} preview image`}
+                  loading="lazy"
+                />
+                <div className="project-card__body">
+                  <h3 className="project-card__title">{project.title}</h3>
+                  <p className="project-card__text">{project.shortDescription}</p>
+                </div>
+              </MotionLink>
+            ))}
+          </motion.div>
+          <div className="projects-cta" style={{ textAlign: 'center', marginTop: '24px' }}>
+            <Link className="project-cta-button" to="/projects">
+              View All Projects →
+            </Link>
+          </div>
+        </motion.section>
+      </main>
+      <ContactBar />
+    </>
+  );
+}
+
+function ProjectsPage() {
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
+    <>
+      <Navigation />
+      <main>
+        <motion.section
+          className="projects"
+          id="all-projects"
+          aria-labelledby="all-projects-title"
+          variants={fadeIn(prefersReducedMotion)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={inViewOnce}
+        >
+          <motion.div
+            className="section-heading"
+            variants={fadeUp(prefersReducedMotion)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={inViewOnce}
+          >
+            <h2 id="all-projects-title">All Projects</h2>
+            <p>Browse all projects with the same card styling and concepts bubbles.</p>
           </motion.div>
 
           <motion.div
@@ -394,6 +519,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/resume" element={<ResumePage />} />
         <Route path="/about" element={<OtherPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/projects/:slug" element={<ProjectPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

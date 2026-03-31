@@ -12,6 +12,7 @@ export type Project = {
   image: string;
   topics: string[];
   links: ProjectLink[];
+  featured?: boolean;
 };
 
 export const projects: Project[] = [
@@ -26,6 +27,7 @@ export const projects: Project[] = [
       "turtlebot3.jpg",
     image:
       "turtlebot3.jpg",
+    featured: true,
     topics: ["Linux", "GitHub","C/C++", "ROS2", "SLAM", "Sensor Fusion", "Localization", "GitHub"],
     links: [],
   },
@@ -40,6 +42,7 @@ export const projects: Project[] = [
       "MQP-self-test.jpg",
     image:
       "MQP-self-test.jpg",
+    featured: true,
     topics: ["C/C++", "PlatformIO", "ESP32", "MPRLS", "H-bridge", "Custom PCB", "TFT Display", "GitHub"],
     links: [],
   },
@@ -54,6 +57,7 @@ export const projects: Project[] = [
       "4DOF.jpg",
     image:
       "4DOF.jpg",
+    featured: true,
     topics: ["Linux", "GitHub","MATLAB", "Simulink", "C/C++", "Forward Kinematics", "Inverse Kinematics", "Computer Vision", "GitHub"],
     links: [],
   },
@@ -68,6 +72,7 @@ export const projects: Project[] = [
       "RBE2002.jpg",
     image:
       "RBE2002.jpg",
+    featured: false,
     topics: ["C/C++", "Pololu Romi 32U4", "ESP32", "MQTT", "AprilTags", "Sensor Fusion", "GitHub", "CameraMV"],
     links: [],
   },
@@ -82,6 +87,7 @@ export const projects: Project[] = [
       "RBE2001.jpg",
     image:
       "RBE2001.jpg",
+    featured: false,
     topics: ["SolidWorks", "FEA", "MATLAB", "Romi 32U4", "H-bridge", "Control Systems"],
     links: [
       { label: "GitHub", url: "https://github.com/" },
