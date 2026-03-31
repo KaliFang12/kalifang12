@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { BrowserRouter, Link, Navigate, Route, Routes, useParams } from "react-router-dom";
 import { getProjectBySlug, projects } from "./data/projects";
 import {
@@ -14,6 +15,71 @@ import {
 const MotionLink = motion(Link);
 
 const asset = (name: string) => `${import.meta.env.BASE_URL}${name}`;
+
+function parseProjectDate(date?: string) {
+  if (!date) return 0;
+
+  const normalized = date.trim().toLowerCase();
+  if (normalized === "present" || normalized === "ongoing" || normalized === "in progress") {
+    return Infinity;
+  }
+
+  const parsed = Date.parse(date);
+  if (!Number.isNaN(parsed)) {
+    return parsed;
+  }
+
+  const split = date.split(" ").filter(Boolean);
+  if (split.length >= 2) {
+    const month = split[0];
+    const year = split[1];
+    const guess = Date.parse(`${month} 1, ${year}`);
+    if (!Number.isNaN(guess)) {
+      return guess;
+    }
+  }
+
+  return 0;
+}
+
+function sortProjectsByDateDesc(projectArray: Array<any>) {
+  return [...projectArray].sort((a, b) => {
+    const aEnd = parseProjectDate(a.endDate);
+    const bEnd = parseProjectDate(b.endDate);
+    if (aEnd !== bEnd) {
+      return bEnd - aEnd;
+    }
+
+    const aStart = parseProjectDate(a.startDate);
+    const bStart = parseProjectDate(b.startDate);
+    return bStart - aStart;
+  });
+}
+
+function getProjectStatus(project: { startDate?: string; endDate?: string }) {
+  const end = project.endDate?.trim().toLowerCase();
+  if (!end || end === "present" || end === "ongoing" || end === "in progress") {
+    return "in-progress";
+  }
+
+  const parsedEnd = parseProjectDate(project.endDate);
+  if (parsedEnd === Infinity) {
+    return "in-progress";
+  }
+
+  return parsedEnd > Date.now() ? "in-progress" : "completed";
+}
+
+function formatProjectDateRange(project: { startDate?: string; endDate?: string }) {
+  if (!project.startDate && !project.endDate) {
+    return "";
+  }
+  if (!project.endDate || project.endDate.toLowerCase() === "present") {
+    return `${project.startDate ?? ""} - Present`;
+  }
+
+  return `${project.startDate ?? ""} - ${project.endDate}`;
+}
 
 function Navigation() {
   return (
@@ -81,10 +147,7 @@ function ContactBar() {
 function HomePage() {
   const prefersReducedMotion = useReducedMotion();
 
-  const featuredProjects = projects.filter((project) => project.featured);
-  const allSkills = Array.from(
-    new Set(projects.flatMap((project) => project.topics.map((topic) => topic.trim())))
-  );
+  const featuredProjects = sortProjectsByDateDesc(projects.filter((project) => project.featured));
 
   return (
     <>
@@ -133,25 +196,64 @@ function HomePage() {
             viewport={inViewOnce}
           >
             <h2 id="skills-title">Technical Skills</h2>
-            <p>Extracted from project concept tags across all projects.</p>
+            <p>Key concepts that I have developed from various projects I have worked on.</p>
           </motion.div>
 
           <motion.div
-            className="skills-grid"
-            variants={staggerContainerFast(prefersReducedMotion)}
+            className="skills-table"
+            variants={fadeIn(prefersReducedMotion)}
             initial="hidden"
             whileInView="visible"
             viewport={inViewOnce}
           >
-            {allSkills.map((skill) => (
-              <motion.span
-                key={skill}
-                className="topic-bubble"
-                variants={fadeUp(prefersReducedMotion)}
-              >
-                {skill}
-              </motion.span>
-            ))}
+            <table>
+              <tbody>
+                <tr>
+                  <th>Programming Languages</th>
+                  <td>Python, C/C++, Java, JavaScript, MATLAB, HTML/CSS</td>
+                </tr>
+                <tr>
+                  <th>Softwares</th>
+                  <td>Linux, MATLAB, Simulink, SolidWorks, ROS2, Arduino IDE</td>
+                </tr>
+                <tr>
+                  <th>Frameworks & Tools</th>
+                  <td>Git, GitHub, PlatformIO, React, Flask</td>
+                </tr>
+                <tr>
+                  <th>Control Algorithms</th>
+                  <td>Bang-Bang Control, PID Control, Motor Control, Robotics Navigation</td>
+                </tr>
+                <tr>
+                  <th>Microcontrollers</th>
+                  <td>Arduino Uno, ESP32, Polulu Romi32u4, Raspberry Pi</td>
+                </tr>
+                <tr>
+                  <th>Communication / Interfaces</th>
+                  <td>I2C, SPI, UART / Serial Communication, WiFi Communication</td>
+                </tr>
+                <tr>
+                  <th>Sensors & Hardware Integration</th>
+                  <td>Gyroscopes, Accelerometers, AprilTag Vision System, Sensor Integration, IMU Data Processing</td>
+                </tr>
+                <tr>
+                  <th>Robotics / Controls</th>
+                  <td>Forward Kinematics, Denavit–Hartenberg (DH) Parameters, Trajectory Planning, State Estimation, Robot Arm Kinematics, Closed Loop Control</td>
+                </tr>
+                <tr>
+                  <th>Simulation & Modeling</th>
+                  <td>Robot Simulation, Dynamic Modeling, MATLAB Robotics Toolbox</td>
+                </tr>
+                <tr>
+                  <th>Fabrication / Prototyping</th>
+                  <td>3D Printing, Mechanical Assembly, Rapid Prototyping</td>
+                </tr>
+                <tr>
+                  <th>Electronics</th>
+                  <td>H-Bridge Motor Drivers, Strain Gauges, Wheatstone Bridge Circuits, Basic Circuit Design</td>
+                </tr>
+              </tbody>
+            </table>
           </motion.div>
         </motion.section>
 
@@ -172,7 +274,7 @@ function HomePage() {
             viewport={inViewOnce}
           >
             <h2 id="projects-title">Featured Projects</h2>
-            <p>Most impressive work, dynamically controlled by project data flags.</p>
+            <p>These are my most recent and challenging projects I am working on.</p>
           </motion.div>
 
           <motion.div
@@ -204,6 +306,7 @@ function HomePage() {
                 />
                 <div className="project-card__body">
                   <h3 className="project-card__title">{project.title}</h3>
+                  <p className="project-card__meta">{formatProjectDateRange(project)}</p>
                   <p className="project-card__text">{project.shortDescription}</p>
                 </div>
               </MotionLink>
@@ -223,6 +326,16 @@ function HomePage() {
 
 function ProjectsPage() {
   const prefersReducedMotion = useReducedMotion();
+  const [projectFilter, setProjectFilter] = useState<"all" | "featured" | "in-progress" | "completed">("all");
+
+  const sortedProjects = sortProjectsByDateDesc(projects);
+
+  const filteredProjects = sortedProjects.filter((project) => {
+    if (projectFilter === "all") return true;
+    if (projectFilter === "featured") return Boolean(project.featured);
+    const status = getProjectStatus(project);
+    return status === projectFilter;
+  });
 
   return (
     <>
@@ -245,27 +358,45 @@ function ProjectsPage() {
             viewport={inViewOnce}
           >
             <h2 id="all-projects-title">All Projects</h2>
-            <p>Browse all projects with the same card styling and concepts bubbles.</p>
+            <p>Browse all projects with interactive sorting and status filtering!</p>
+            <div className="project-filter-controls">
+              <label htmlFor="project-filter">Filter:</label>
+              <select
+                id="project-filter"
+                value={projectFilter}
+                onChange={(e) => setProjectFilter(e.target.value as any)}
+              >
+                <option value="all">All</option>
+                <option value="featured">Featured</option>
+                <option value="in-progress">In Progress</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
           </motion.div>
 
-          <motion.div
-            className="project-grid"
-            variants={staggerContainerFast(prefersReducedMotion)}
-            initial="hidden"
-            whileInView="visible"
-            viewport={inViewOnce}
-          >
-            {projects.map((project) => (
-              <MotionLink
-                key={project.slug}
-                to={`/projects/${project.slug}`}
-                className="project-card"
-                variants={fadeUp(prefersReducedMotion)}
-                whileHover={{ y: prefersReducedMotion ? 0 : -5 }}
-                whileTap={{ scale: prefersReducedMotion ? 1 : 0.99 }}
-                transition={{ duration: prefersReducedMotion ? 0.1 : 0.6, ease: EASING.default }}
-                aria-label={`Open dedicated page for ${project.title}`}
-              >
+          {filteredProjects.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '2rem 1rem', color: 'var(--muted)' }}>
+              No matching projects found for this filter.
+            </div>
+          ) : (
+            <motion.div
+              className="project-grid"
+              variants={staggerContainerFast(prefersReducedMotion)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={inViewOnce}
+            >
+              {filteredProjects.map((project) => (
+                <MotionLink
+                  key={project.slug}
+                  to={`/projects/${project.slug}`}
+                  className="project-card"
+                  variants={fadeUp(prefersReducedMotion)}
+                  whileHover={{ y: prefersReducedMotion ? 0 : -5 }}
+                  whileTap={{ scale: prefersReducedMotion ? 1 : 0.99 }}
+                  transition={{ duration: prefersReducedMotion ? 0.1 : 0.6, ease: EASING.default }}
+                  aria-label={`Open dedicated page for ${project.title}`}
+                >
                 {(project.slug === "slam-robot-navigation" || project.slug === "blood-pressure-monitor") && (
                   <div className="project-card__badge">In Progress</div>
                 )}
@@ -277,11 +408,13 @@ function ProjectsPage() {
                 />
                 <div className="project-card__body">
                   <h3 className="project-card__title">{project.title}</h3>
+                  <p className="project-card__meta">{formatProjectDateRange(project)}</p>
                   <p className="project-card__text">{project.shortDescription}</p>
                 </div>
               </MotionLink>
             ))}
           </motion.div>
+          )}
         </motion.section>
       </main>
       <ContactBar />
@@ -396,6 +529,7 @@ function ProjectPage() {
         </Link>
         <p className="hero__eyebrow">Project</p>
         <h1 className="project-detail__title">{project.title}</h1>
+        <p className="project-detail__dates">{formatProjectDateRange(project)}</p>
 
         {/* Topics Section (directly under title) */}
         <section className="project-topics">

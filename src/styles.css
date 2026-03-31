@@ -114,6 +114,60 @@ img {
   letter-spacing: -0.02em;
 }
 
+.skills {
+  width: min(1120px, calc(100% - 3rem));
+  margin: 0.75rem auto;
+  padding-top: 1.5rem;
+  padding-bottom: 0.75rem;
+}
+
+.skills-table {
+  margin-top: 0.75rem;
+}
+
+.skills-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.skills-table th,
+.skills-table td {
+  padding: 0.72rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.92rem;
+}
+
+.skills-table th {
+  background: var(--accent-soft);
+  font-weight: 600;
+  color: var(--accent);
+  width: 180px;
+  vertical-align: top;
+}
+
+.skills-table td {
+  line-height: 1.4;
+}
+
+.skills-table {
+  margin-top: 1rem;
+}
+
+.skills-table td {
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.skills-table tr:last-child th,
+.skills-table tr:last-child td {
+  border-bottom: none;
+}
+
 .section-heading p {
   margin: 0.4rem 0 0;
   color: var(--muted);
@@ -192,6 +246,37 @@ img {
 .project-page {
   width: min(960px, calc(100% - 2rem));
   margin: 2rem auto 4rem;
+}
+
+.project-filter-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.52rem;
+  margin-top: 0.85rem;
+}
+
+.project-filter-controls label {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.project-filter-controls select {
+  min-height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  padding: 0.4rem 0.8rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.project-filter-controls select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 .project-detail {
@@ -511,9 +596,9 @@ img {
 .topic-bubble {
   display: inline-block;
   padding: 0.5rem 1rem;
-  background: var(--accent-soft);
-  color: var(--accent);
-  border: 1px solid var(--accent);
+  background: #eaf4ff;
+  color: #1f4ca1;
+  border: 1px solid #bad4ff;
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: 500;
