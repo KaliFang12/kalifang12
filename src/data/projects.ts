@@ -10,6 +10,7 @@ export type Project = {
   details: string;
   thumbnail: string;
   image: string;
+  images?: string[];
   topics: string[];
   links: ProjectLink[];
   featured?: boolean;
@@ -27,6 +28,7 @@ export const projects: Project[] = [
       "Designed and built a wearable blood pressure monitor as a Major Qualifying Project, handling both the hardware and firmware end-to-end. Soldered a custom PCB integrating an ESP32 microcontroller, MPRLS pressure sensor, PPG pulse sensor, H-bridge motor driver, and air pump into a single compact board. Wrote firmware in C++ using PlatformIO implementing a closed-loop pneumatic control system, IIR signal filtering, oscillometric beat detection, and real-time systolic/diastolic readings displayed on a TFT screen via a two-ESP32 UART architecture.",
     thumbnail: "MQP-self-test.jpg",
     image: "MQP-self-test.jpg",
+    images: ["MQP-self-test.jpg", "mqp-bp-graph.jpg"],
     startDate: "Aug 2025",
     endDate: "May 2026",
     featured: true,
@@ -54,9 +56,10 @@ export const projects: Project[] = [
     shortDescription:
       "An autonomous robot designed to navigate complex mazes using advanced sensors and algorithms.",
     details:
-      "The Autonomous Maze Navigation Robot project developed a maze-solving system using a Pololu Romi 32U4 platform. It consists of 4 Romis communicating wirelessly through an ESP32 to navigate its surroundings and exit a maze. IMU and encoders provided odometry and orientation, while AprilTags were used for communicating coordinates. Robots shared navigation status and obstacle data via MQTT.\n\nThe control strategy used sensor fusion IR distance sensors, line detectors, and camera-based tag detection. A path planner chose route segments in real-time, and a state machine handled transitions between exploration, obstacle reaction, and goal-seeking behaviors.\n\nA key deliverable was reliable multi-robot cooperation: robots updated each other's internal map and traversal decisions, enabling dynamic rerouting based on newly detected barriers. The project demonstrated robust autonomous navigation in constrained environments with real-world sensor noise and communication latency.",
+      "The Autonomous Maze Navigation Robot project developed a maze-solving system using a Pololu Romi 32U4 platform. It consists of 4 Romis communicating wirelessly through an ESP32 to navigate its surroundings and exit a maze. IMU and encoders provided odometry and orientation, while AprilTags were used for communicating coordinates. Robots shared navigation status and obstacle data via MQTT.\n\nThe control strategy used sensor fusion IR distance sensors, line detectors, and camera-based tag detection. A path planner chose route segments in real-time, and a state machine handled transitions between exploration, obstacle reaction, and goal-seeking behaviors.\n\nA key deliverable was reliable multi-robot cooperation: robots updated each other's internal map and traversal decisions, enabling dynamic rerouting based on newly detected barriers. The project demonstrated robust autonomous navigation in constrained environments with real-world sensor noise and communication latency.\n\n## WiFi Communication (IoT)\nUsing an ESP32, the Bluetooth system was sent through an MQTT communication server for simple messages of positions to go through and inform other robots when it crosses a specific marker. Additionally, AprilTags would send specific locations for the robots to travel to.",
     thumbnail: "RBE2002.jpg",
     image: "RBE2002.jpg",
+    images: ["RBE2002.jpg", "romi.jpg", "esp32.jpg"],
     startDate: "Mar 2023",
     endDate: "May 2023",
     featured: false,
@@ -69,9 +72,10 @@ export const projects: Project[] = [
     shortDescription:
       "A robotic arm with four degrees of freedom, designed for precise manipulation and control.",
     details:
-      "The 4-DOF Robotic Arm project focused on modeling, control, and task-space manipulation of a robotic manipulator using a combination of analytical kinematics, simulation tools, and vision-based object detection. The system was developed using MATLAB and Simulink to model the robot’s kinematic structure, plan motion trajectories, and test control algorithms.\n\nThe arm’s geometry was defined using Denavit–Hartenberg parameters, enabling the derivation of forward kinematics to determine the end-effector position from joint angles and inverse kinematics to compute the joint configurations required to reach a target position within the robot’s workspace. These models were used to analyze the arm’s task space, ensuring that objects detected by the system were reachable.\n\nTrajectory planning algorithms were implemented to generate smooth and efficient joint-space motion between positions while maintaining stability and avoiding abrupt movements. The planned trajectories were simulated and visualized in MATLAB using a 3D stick model of the manipulator to verify the robot’s motion and end-effector path.\n\nA camera-based vision system was integrated to detect and classify objects by color. Image processing filters were used through MATLAB's camera functions to isolate objects using color thresholds, allowing the robot to determine object locations within the workspace. These detections were converted into task-space coordinates, which were then used by the inverse kinematics algorithms to position the end effector for object interaction.\n\nThis project combined robot kinematics, trajectory planning, computer vision, and simulation-based validation to create a robotic system capable of detecting colored objects and performing controlled manipulations within its workspace.",
+      "The 4-DOF Robotic Arm project focused on modeling, control, and task-space manipulation of a robotic manipulator using a combination of analytical kinematics, simulation tools, and vision-based object detection. The system was developed using MATLAB and Simulink to model the robot’s kinematic structure, plan motion trajectories, and test control algorithms.\n\n## Forward/Inverse Kinematics\nThese topics were utilized by creating custom C libraries to calculate the distance for the robotic arm to travel from one position to another. For forward kinematics, positions were given to each joint for the system to travel to without knowing the exact end effector position. Conversely, inverse kinematics were used to be able to send the robotic arm a position, and find the positions each joint needs to travel to for the end effector position to end there.\n\n## Trajectory Planning\nA quintuple trajectory equation was used to ensure smoothing and efficient speed for the arm to travel in. This ensured that movements stayed consistent from positions a to b.\n\n## Camera Vision\nUsing the camera system provided by the robot, we used MATLAB to correct the fisheye lens and color disorientations to ensure that the robot is able to identify the necessary components. Using functions provided by MATLAB, tools such as imfill() and mask helped smooth color detection issues.\n\nThis project combined robot kinematics, trajectory planning, computer vision, and simulation-based validation to create a robotic system capable of detecting colored objects and performing controlled manipulations within its workspace.",
     thumbnail: "4DOF.jpg",
     image: "4DOF.jpg",
+    images: ["4DOF.jpg", "funny-graph.jpg"],
     startDate: "Aug 2024",
     endDate: "Oct 2024",
     featured: false,

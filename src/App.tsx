@@ -547,46 +547,131 @@ function ProjectPage() {
           <img className="project-detail__image" src={asset(project.image)} alt={`${project.title} detailed preview`} />
         </div>
 
-        {/* Render each paragraph separately for the details text */}
-        <div className="project-detail__description-wrap">
-          {project.details.split("\n\n").map((paragraph, index) => (
-            <p key={index} className="project-detail__description">
-              {paragraph.trim()}
-            </p>
-          ))}
-        </div>
-
-        {/* Additional Image Section */}
+        {/* Project Details Section */}
         <section className="project-section">
-          <h2>Additional Images</h2>
-          <div className="project-detail__media-wrap">
-            {project.slug === "blood-pressure-monitor" ? (
-              <div className="additional-images-grid">
-                <img src={asset("MQP-test1.jpg")} alt="MQP Test 1" className="additional-image" />
-                <img src={asset("MQP-self-test.jpg")} alt="MQP Self Test" className="additional-image" />
-              </div>
-            ) : project.slug === "4dof-robotic-arm" ? (
-              <div className="additional-images-grid">
-                <img src={asset("kinematics.jpg")} alt="Kinematics" className="additional-image" />
-                <img src={asset("matlab-filter.jpg")} alt="MATLAB Filter" className="additional-image" />
-                <img src={asset("funny-graph.jpg")} alt="Funny Graph" className="additional-image" />
-                <img src={asset("robot-workspace.jpg")} alt="Robot Workspace" className="additional-image" />
-              </div>
-            ) : project.slug === "autonomous-maze-navigation-robot" ? (
-              <div className="additional-images-grid">
-                <img src={asset("romi.jpg")} alt="Pololu Romi" className="additional-image" />
-                <img src={asset("esp32.jpg")} alt="ESP32" className="additional-image" />
-              </div>
-            ) : project.slug === "robotic-linkage-system" ? (
-              <div className="additional-images-grid">
-                <img src={asset("RBE2001.jpg")} alt="RBE2001 Linkage System" className="additional-image" />
-                <img src={asset("CAD.jpg")} alt="CAD Model" className="additional-image" />
-              </div>
-            ) : (
-              <div className="placeholder-image">
-                <p>Additional project images will be imported here</p>
-              </div>
-            )}
+          <h2>Project Details</h2>
+          <div className="project-detail__description">
+            {(() => {
+              const lines = project.details.split('\n');
+              const elements = [];
+              let i = 0;
+
+              while (i < lines.length) {
+                const line = lines[i];
+
+                if (line.startsWith('## ')) {
+                  const heading = line.substring(3);
+
+                  if (heading === 'Forward/Inverse Kinematics' && project.slug === '4dof-robotic-arm') {
+                    elements.push(
+                      <div key={`section-${i}`} className="project-detail__section-with-image">
+                        <img src={asset('kinematics.jpg')} alt="Kinematics" className="project-detail__inline-image" />
+                        <div className="project-detail__text-content">
+                          <h3>{heading}</h3>
+                          {(() => {
+                            const contentLines = [];
+                            i++; // Skip the heading line
+                            while (i < lines.length && !lines[i].startsWith('## ')) {
+                              const contentLine = lines[i];
+                              if (contentLine.trim()) {
+                                contentLines.push(<p key={`p-${i}`}>{contentLine}</p>);
+                              } else {
+                                contentLines.push(<br key={`br-${i}`} />);
+                              }
+                              i++;
+                            }
+                            i--; // Step back so the next iteration processes the heading
+                            return contentLines;
+                          })()}
+                        </div>
+                      </div>
+                    );
+                  } else if (heading === 'Trajectory Planning' && project.slug === '4dof-robotic-arm') {
+                    elements.push(
+                      <div key={`section-${i}`} className="project-detail__section-with-image">
+                        <img src={asset('robot-workspace.jpg')} alt="Robot Workspace" className="project-detail__inline-image" />
+                        <div className="project-detail__text-content">
+                          <h3>{heading}</h3>
+                          {(() => {
+                            const contentLines = [];
+                            i++; // Skip the heading line
+                            while (i < lines.length && !lines[i].startsWith('## ')) {
+                              const contentLine = lines[i];
+                              if (contentLine.trim()) {
+                                contentLines.push(<p key={`p-${i}`}>{contentLine}</p>);
+                              } else {
+                                contentLines.push(<br key={`br-${i}`} />);
+                              }
+                              i++;
+                            }
+                            i--; // Step back so the next iteration processes the heading
+                            return contentLines;
+                          })()}
+                        </div>
+                      </div>
+                    );
+                  } else if (heading === 'WiFi Communication (IoT)' && project.slug === 'autonomous-maze-navigation-robot') {
+                    elements.push(
+                      <div key={`section-${i}`} className="project-detail__section-with-image">
+                        <img src={asset('esp32.jpg')} alt="ESP32" className="project-detail__inline-image" />
+                        <div className="project-detail__text-content">
+                          <h3>{heading}</h3>
+                          {(() => {
+                            const contentLines = [];
+                            i++; // Skip the heading line
+                            while (i < lines.length && !lines[i].startsWith('## ')) {
+                              const contentLine = lines[i];
+                              if (contentLine.trim()) {
+                                contentLines.push(<p key={`p-${i}`}>{contentLine}</p>);
+                              } else {
+                                contentLines.push(<br key={`br-${i}`} />);
+                              }
+                              i++;
+                            }
+                            i--; // Step back so the next iteration processes the heading
+                            return contentLines;
+                          })()}
+                        </div>
+                      </div>
+                    );
+                  } else if (heading === 'Camera Vision' && project.slug === '4dof-robotic-arm') {
+                    elements.push(
+                      <div key={`section-${i}`} className="project-detail__section-with-image">
+                        <img src={asset('matlab-filter.jpg')} alt="MATLAB Filter" className="project-detail__inline-image" />
+                        <div className="project-detail__text-content">
+                          <h3>{heading}</h3>
+                          {(() => {
+                            const contentLines = [];
+                            i++; // Skip the heading line
+                            while (i < lines.length && !lines[i].startsWith('## ')) {
+                              const contentLine = lines[i];
+                              if (contentLine.trim()) {
+                                contentLines.push(<p key={`p-${i}`}>{contentLine}</p>);
+                              } else {
+                                contentLines.push(<br key={`br-${i}`} />);
+                              }
+                              i++;
+                            }
+                            i--; // Step back so the next iteration processes the heading
+                            return contentLines;
+                          })()}
+                        </div>
+                      </div>
+                    );
+                  } else {
+                    elements.push(<h3 key={i}>{heading}</h3>);
+                  }
+                } else if (line.trim()) {
+                  elements.push(<p key={i}>{line}</p>);
+                } else {
+                  elements.push(<br key={i} />);
+                }
+
+                i++;
+              }
+
+              return elements;
+            })()}
           </div>
         </section>
 
@@ -641,6 +726,19 @@ function ProjectPage() {
             ))}
           </div>
         </section>
+
+        {/* Additional Images Section */}
+        {project.images && project.images.length > 1 && (
+          <section className="project-section">
+            <h2>Additional Images</h2>
+            <div className="additional-images-grid">
+              {project.images.slice(1).map((img, index) => (
+                <img key={index} src={asset(img)} alt={`${project.title} image ${index + 2}`} className={`additional-image ${img === 'funny-graph.jpg' ? 'additional-image--small' : ''}`} />
+              ))}
+            </div>
+          </section>
+        )}
+
       </motion.div>
     </main>
   );
