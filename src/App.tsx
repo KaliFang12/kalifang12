@@ -218,39 +218,43 @@ function HomePage() {
                 </tr>
                 <tr>
                   <th>Frameworks & Tools</th>
-                  <td>Git, GitHub, PlatformIO, React, Flask</td>
+                  <td>Git, GitHub, PlatformIO, React, Flask, MQTT</td>
                 </tr>
                 <tr>
                   <th>Control Algorithms</th>
-                  <td>Bang-Bang Control, PID Control, Motor Control, Robotics Navigation</td>
+                  <td>Bang-Bang Control, PID Control, Hysteresis Control, Motor Control, Closed Loop Control</td>
                 </tr>
                 <tr>
                   <th>Microcontrollers</th>
-                  <td>Arduino Uno, ESP32, Polulu Romi32u4, Raspberry Pi</td>
+                  <td>Arduino Uno, ESP32, Pololu Romi 32U4, Raspberry Pi</td>
                 </tr>
                 <tr>
                   <th>Communication / Interfaces</th>
-                  <td>I2C, SPI, UART / Serial Communication, WiFi Communication</td>
+                  <td>I2C, SPI, UART / Serial Communication, WiFi (IoT), MQTT</td>
                 </tr>
                 <tr>
                   <th>Sensors & Hardware Integration</th>
-                  <td>Gyroscopes, Accelerometers, AprilTag Vision System, Sensor Integration, IMU Data Processing</td>
+                  <td>IMU (Gyroscopes, Accelerometers), AprilTag Vision, Sensor Fusion, Odometry, Pressure Sensors, PPG Sensors</td>
                 </tr>
                 <tr>
                   <th>Robotics / Controls</th>
-                  <td>Forward Kinematics, Denavit–Hartenberg (DH) Parameters, Trajectory Planning, State Estimation, Robot Arm Kinematics, Closed Loop Control</td>
+                  <td>SLAM, Forward/Inverse Kinematics, Denavit–Hartenberg (DH) Parameters, Trajectory Planning, Path Planning, State Estimation, Odometry, State Machine Design</td>
+                </tr>
+                <tr>
+                  <th>Computer Vision</th>
+                  <td>MATLAB Image Processing, AprilTag Detection, Color Detection, Fisheye Lens Correction, Camera Calibration</td>
                 </tr>
                 <tr>
                   <th>Simulation & Modeling</th>
-                  <td>Robot Simulation, Dynamic Modeling, MATLAB Robotics Toolbox</td>
+                  <td>Robot Simulation, Dynamic Modeling, MATLAB Robotics Toolbox, FEA (SolidWorks)</td>
                 </tr>
                 <tr>
                   <th>Fabrication / Prototyping</th>
-                  <td>3D Printing, Mechanical Assembly, Rapid Prototyping</td>
+                  <td>3D Printing, Mechanical Assembly, Rapid Prototyping, PCB Design, Soldering</td>
                 </tr>
                 <tr>
                   <th>Electronics</th>
-                  <td>H-Bridge Motor Drivers, Strain Gauges, Wheatstone Bridge Circuits, Basic Circuit Design</td>
+                  <td>Custom PCB Design, H-Bridge Motor Drivers, IIR Signal Filtering, Strain Gauges, Wheatstone Bridge Circuits</td>
                 </tr>
               </tbody>
             </table>
@@ -524,8 +528,8 @@ function ProjectPage() {
         initial="hidden"
         animate="visible"
       >
-        <Link className="project-detail__back" to="/">
-          ← Back to home
+        <Link className="project-detail__back" to="/projects">
+          ← Back to projects
         </Link>
         <p className="hero__eyebrow">Project</p>
         <h1 className="project-detail__title">{project.title}</h1>
@@ -605,6 +609,30 @@ function ProjectPage() {
                               i++;
                             }
                             i--; // Step back so the next iteration processes the heading
+                            return contentLines;
+                          })()}
+                        </div>
+                      </div>
+                    );
+                  } else if (heading === 'Microcontroller' && project.slug === 'autonomous-maze-navigation-robot') {
+                    elements.push(
+                      <div key={`section-${i}`} className="project-detail__section-with-image">
+                        <img src={asset('romi.jpg')} alt="Romi" className="project-detail__inline-image" />
+                        <div className="project-detail__text-content">
+                          <h3>{heading}</h3>
+                          {(() => {
+                            const contentLines = [];
+                            i++;
+                            while (i < lines.length && !lines[i].startsWith('## ')) {
+                              const contentLine = lines[i];
+                              if (contentLine.trim()) {
+                                contentLines.push(<p key={`p-${i}`}>{contentLine}</p>);
+                              } else {
+                                contentLines.push(<br key={`br-${i}`} />);
+                              }
+                              i++;
+                            }
+                            i--;
                             return contentLines;
                           })()}
                         </div>
