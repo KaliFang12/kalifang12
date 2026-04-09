@@ -158,23 +158,10 @@ function HomePage() {
         animate="visible"
         variants={slowReveal(prefersReducedMotion)}
       >
-        <div className="hero__inner">
-          <div className="hero__photo-wrapper">
-            <img
-              className="hero__photo"
-              src={asset("Myself.jpg")}
-              alt="Kali Fang - Profile Photo"
-            />
-          </div>
-          <div className="hero__content">
-            <p className="hero__eyebrow">Portfolio</p>
-            <h1 className="hero__title">Kali Fang</h1>
-            <p className="hero__about">
-              I'm a Senior Mechanical Engineering student graduating in May 2026 at Worcester Polytechnic 
-              Institute (WPI) with a minor in Robotics Engineering. I have experience in software development, 
-              robotics, and mechanical design. Check out my projects below!
-            </p>
-          </div>
+        <div className="hero__banner">
+          <img className="hero__banner-img" src={asset("robot-kali.png")} alt="Kali Fang with robot" />
+          <div className="hero__banner-overlay" />
+          <h1 className="hero__banner-title">Kali Fang</h1>
         </div>
       </motion.header>
 
