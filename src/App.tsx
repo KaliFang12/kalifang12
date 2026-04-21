@@ -676,6 +676,29 @@ function ProjectPage() {
                   } else {
                     elements.push(<h3 key={i}>{heading}</h3>);
                   }
+                } else if (line.startsWith('|')) {
+                  const tableRows: string[][] = [];
+                  while (i < lines.length && lines[i].startsWith('|')) {
+                    const raw = lines[i];
+                    if (!raw.match(/^\|[\s\-|:]+\|$/)) {
+                      tableRows.push(raw.split('|').slice(1, -1).map(c => c.trim()));
+                    }
+                    i++;
+                  }
+                  i--;
+                  const [headerRow, ...bodyRows] = tableRows;
+                  elements.push(
+                    <table key={`table-${i}`} className="project-detail__table">
+                      <thead>
+                        <tr>{headerRow.map((cell, j) => <th key={j}>{cell}</th>)}</tr>
+                      </thead>
+                      <tbody>
+                        {bodyRows.map((row, j) => (
+                          <tr key={j}>{row.map((cell, k) => <td key={k}>{cell}</td>)}</tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  );
                 } else if (line.trim()) {
                   elements.push(<p key={i}>{line}</p>);
                 } else {

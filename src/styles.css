@@ -117,7 +117,6 @@ img {
   font-weight: 400;
   font-size: 0.92rem;
   padding: 0.35rem 0.8rem;
-  border-radius: 0;
   transition: color 0.15s ease;
 }
 
@@ -198,7 +197,7 @@ img {
   border-bottom: none;
 }
 
-/* ── Project grid (home + all-projects) ───────────── */
+/* ── Project grid ─────────────────────────────────── */
 
 .project-grid {
   display: grid;
@@ -226,7 +225,6 @@ img {
   opacity: 0.82;
   transform: none;
   box-shadow: none;
-  border-color: transparent;
 }
 
 .project-card:focus-visible {
@@ -492,6 +490,38 @@ img {
   padding-bottom: 0.6rem;
 }
 
+/* ── Project detail table ─────────────────────────── */
+
+.project-detail__table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0 1.5rem;
+}
+
+.project-detail__table th,
+.project-detail__table td {
+  text-align: left;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.project-detail__table thead th {
+  font-weight: 700;
+  color: var(--text);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.project-detail__table tbody td {
+  color: var(--muted);
+  font-size: 0.93rem;
+}
+
+.project-detail__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
 /* ── Video ────────────────────────────────────────── */
 
 .placeholder-video {
@@ -521,14 +551,12 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 0;
   box-shadow: none;
 }
 
 .project-detail__video {
   width: 100%;
   max-width: 1000px;
-  border-radius: 0;
 }
 
 /* ── Additional images ────────────────────────────── */
@@ -551,7 +579,6 @@ img {
 
 .additional-image--small {
   max-width: 200px;
-  width: auto;
 }
 
 /* ── Video links ──────────────────────────────────── */
@@ -573,16 +600,13 @@ img {
   border-bottom: 1px solid currentColor;
   padding: 0 0 2px;
   box-shadow: none;
-  border-radius: 0;
   transition: opacity 0.2s ease;
 }
 
 .video-link:hover {
-  background: none;
-  color: var(--accent);
+  opacity: 0.65;
   transform: none;
   box-shadow: none;
-  opacity: 0.65;
 }
 
 /* ── Contact bar ──────────────────────────────────── */
@@ -690,16 +714,13 @@ img {
 .image-location-item {
   background: transparent;
   border: none;
-  border-radius: 0;
   overflow: hidden;
-  box-shadow: none;
   transition: opacity 0.2s ease;
 }
 
 .image-location-item:hover {
-  transform: none;
-  box-shadow: none;
   opacity: 0.85;
+  transform: none;
 }
 
 .location-photo {
@@ -726,10 +747,9 @@ img {
 /* ── Resume ───────────────────────────────────────── */
 
 .resume-container {
-  max-width: 100%;
-  border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--line);
+  border-radius: var(--radius);
 }
 
 .resume-image {
