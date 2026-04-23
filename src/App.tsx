@@ -159,13 +159,31 @@ function HomePage() {
         variants={slowReveal(prefersReducedMotion)}
       >
         <div className="hero__banner">
-          <img className="hero__banner-img" src={asset("robot-kali.png")} alt="Kali Fang with robot" />
+          <video className="hero__banner-img" src={asset("rbe3001_vid.mov")} autoPlay muted loop playsInline />
           <div className="hero__banner-overlay" />
           <h1 className="hero__banner-title">Kali Fang</h1>
         </div>
       </motion.header>
 
       <main>
+        <motion.section
+          className="intro"
+          variants={fadeIn(prefersReducedMotion)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={inViewOnce}
+        >
+          <div className="intro__inner">
+            <img src={asset("Myself.jpg")} alt="Kali Fang" className="intro__photo" />
+            <p className="intro__blurb">
+              I'm currently a senior at Worcester Polytechnic Institute studying Mechanical Engineering
+              with a minor in Robotics Engineering. I'm passionate about robotic systems and integrating
+              hardware/software together with experience in embedded and controls systems. I'm currently
+              looking for full-time positions in fields for controls engineering!
+            </p>
+          </div>
+        </motion.section>
+
         <motion.section
           className="skills"
           id="skills"
@@ -670,6 +688,68 @@ function ProjectPage() {
                             i--; // Step back so the next iteration processes the heading
                             return contentLines;
                           })()}
+                        </div>
+                      </div>
+                    );
+                  } else if (heading === 'Electronic Design' && project.slug === 'blood-pressure-monitor') {
+                    elements.push(
+                      <div key={`section-${i}`}>
+                        <h3>{heading}</h3>
+                        <img src={asset('bp-block-diagram.png')} alt="Block Diagram" className="bp-block-diagram" />
+                        {(() => {
+                          const contentElements: React.ReactNode[] = [];
+                          i++;
+                          while (i < lines.length && !lines[i].startsWith('## ')) {
+                            if (lines[i].startsWith('|')) {
+                              const tableRows: string[][] = [];
+                              while (i < lines.length && lines[i].startsWith('|')) {
+                                const raw = lines[i];
+                                if (!raw.match(/^\|[\s\-|:]+\|$/)) {
+                                  tableRows.push(raw.split('|').slice(1, -1).map(c => c.trim()));
+                                }
+                                i++;
+                              }
+                              i--;
+                              const [headerRow, ...bodyRows] = tableRows;
+                              contentElements.push(
+                                <table key={`table-${i}`} className="project-detail__table">
+                                  <thead><tr>{headerRow.map((cell, j) => <th key={j}>{cell}</th>)}</tr></thead>
+                                  <tbody>{bodyRows.map((row, j) => <tr key={j}>{row.map((cell, k) => <td key={k}>{cell}</td>)}</tr>)}</tbody>
+                                </table>
+                              );
+                            } else if (lines[i].trim()) {
+                              contentElements.push(<p key={`p-${i}`}>{lines[i]}</p>);
+                            } else {
+                              contentElements.push(<br key={`br-${i}`} />);
+                            }
+                            i++;
+                          }
+                          i--;
+                          return contentElements;
+                        })()}
+                      </div>
+                    );
+                  } else if (heading === 'Data Collection' && project.slug === 'blood-pressure-monitor') {
+                    elements.push(
+                      <div key={`section-${i}`}>
+                        <h3>{heading}</h3>
+                        {(() => {
+                          const contentElements: React.ReactNode[] = [];
+                          i++;
+                          while (i < lines.length && !lines[i].startsWith('## ')) {
+                            if (lines[i].trim()) {
+                              contentElements.push(<p key={`p-${i}`}>{lines[i]}</p>);
+                            } else {
+                              contentElements.push(<br key={`br-${i}`} />);
+                            }
+                            i++;
+                          }
+                          i--;
+                          return contentElements;
+                        })()}
+                        <div className="bp-graphs">
+                          <img src={asset('normal-bp.png')} alt="Normal blood pressure reading" className="bp-graph-img" />
+                          <img src={asset('controlled-bp.png')} alt="Controlled blood pressure reading" className="bp-graph-img" />
                         </div>
                       </div>
                     );

@@ -25,9 +25,9 @@ export const projects: Project[] = [
     shortDescription:
       "Designed and implemented a blood pressure monitoring system that delivers clinical-grade accuracy in a compact, user-friendly device.",
     details:
-      "Designed and built a wearable blood pressure monitor as a Major Qualifying Project, handling both the hardware and firmware end-to-end. Soldered a custom PCB integrating an ESP32 microcontroller, MPRLS pressure sensor, PPG pulse sensor, H-bridge motor driver, and air pump into a single compact board. Wrote firmware in C++ using PlatformIO implementing a closed-loop pneumatic control system, IIR signal filtering, oscillometric beat detection, and real-time systolic/diastolic readings displayed on a TFT screen via a two-ESP32 UART architecture.\n\n## Electronic Components\n| Component |\n|---|\n| ESP32 |\n| Push Button |\n| MPRLS Pressure Sensor |\n| Pulse Sensor |\n| DRV8833 H-Bridge Motor Driver |\n| Mitsumi Air Pump |\n| 3.3V Solenoid Valve |\n| 9V Power Supply |\n\n## Algorithm\nOur algorithm uses a rolling window of recent pressure readings to compute a running mean and standard deviation. As the cuff deflates, each new sample is evaluated against this window — if the reading exceeds the mean by a set multiple of the standard deviation, it is flagged as the first sign of oscillometric blood flow, marking the onset of pulse detection for systolic and diastolic calculation.\n\n## Implementation/Data Collection\n[Work in Progress]",
-    thumbnail: "MQP-self-test.jpg",
-    image: "MQP-self-test.jpg",
+      "Designed and built a wearable blood pressure monitor as a Major Qualifying Project, handling both the hardware and firmware end-to-end. Soldered a custom PCB integrating an ESP32 microcontroller, MPRLS pressure sensor, PPG pulse sensor, H-bridge motor driver, and air pump into a single compact board. Wrote firmware in C++ using PlatformIO implementing a closed-loop pneumatic control system, IIR signal filtering, oscillometric beat detection, and real-time systolic/diastolic readings displayed on a TFT screen via a two-ESP32 UART architecture.\n\n## Electronic Design\n| Component | Qty |\n|---|---|\n| ESP32 | 2 |\n| Push Button | 1 |\n| MPRLS Pressure Sensor | 1 |\n| Pulse Sensor | 1 |\n| DRV8833 H-Bridge Motor Driver | 1 |\n| Mitsumi Air Pump | 1 |\n| 3.3V Solenoid Valve | 2 |\n| 9V Power Supply | 1 |\n\n## Physical Design\n[Work in Progress]\n\n## Algorithm\nOur algorithm uses a rolling window of recent pressure readings to compute a running mean and standard deviation. As the cuff deflates, each new sample is evaluated against this window — if the reading exceeds the mean by a set multiple of the standard deviation, it is flagged as the first sign of oscillometric blood flow, marking the onset of pulse detection for systolic and diastolic calculation.\n\n## Data Collection\n[Work in Progress]",
+    thumbnail: "bp-finished.jpg",
+    image: "bp-finished.jpg",
     images: ["MQP-self-test.jpg", "mqp-bp-graph.jpg"],
     startDate: "Aug 2025",
     endDate: "May 2026",
@@ -44,6 +44,7 @@ export const projects: Project[] = [
       "The SLAM: Autonomous Robot Navigation System is designed to provide robust and efficient navigation capabilities for autonomous robots. It utilizes Simultaneous Localization and Mapping (SLAM) techniques to create accurate maps of the environment while keeping track of the robot's position.\n\n## Linux/ROS2\n[Work in Progress]\n\n## Forward/Inverse Kinematics\n[Work in Progress]\n\n## Odometry\n[Work in Progress]\n\n## Simulation vs Physical Demonstration\n[Work in Progress]\n\n## Path Planning (A*)\n[Work in Progress]",
     thumbnail: "turtlebot3.jpg",
     image: "turtlebot3.jpg",
+    images: ["turtlebot3.jpg", "gazebo.jpg"],
     startDate: "Mar 2026",
     endDate: "May 2026",
     featured: true,
