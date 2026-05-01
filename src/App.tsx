@@ -753,6 +753,27 @@ function ProjectPage() {
                         </div>
                       </div>
                     );
+                  } else if (heading === 'Mapping' && project.slug === 'slam-robot-navigation') {
+                    elements.push(
+                      <div key={`section-${i}`}>
+                        <h3>{heading}</h3>
+                        {(() => {
+                          const contentElements: React.ReactNode[] = [];
+                          i++;
+                          while (i < lines.length && !lines[i].startsWith('## ')) {
+                            if (lines[i].trim()) {
+                              contentElements.push(<p key={`p-${i}`}>{lines[i]}</p>);
+                            } else {
+                              contentElements.push(<br key={`br-${i}`} />);
+                            }
+                            i++;
+                          }
+                          i--;
+                          return contentElements;
+                        })()}
+                        <img src={asset('frontier-exploration.png')} alt="Frontier exploration map" className="bp-block-diagram" />
+                      </div>
+                    );
                   } else {
                     elements.push(<h3 key={i}>{heading}</h3>);
                   }
