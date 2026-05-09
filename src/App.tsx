@@ -450,6 +450,13 @@ function OtherPage() {
 
           <h1 className="about-title">About Me</h1>
 
+          <section className="content-section">
+            <h2>Experience</h2>
+            <ul className="about-todo-list">
+              <li>[Add work experience details here]</li>
+            </ul>
+          </section>
+
           {/* Image Locations Section */}
           <section className="content-section">
             <h2>Hobbies</h2>

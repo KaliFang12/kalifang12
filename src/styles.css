@@ -765,6 +765,19 @@ img {
   padding-bottom: 0.6rem;
 }
 
+.about-todo-list {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin: 0;
+}
+
+.about-todo-list li {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+
 /* ── Hobbies grid ─────────────────────────────────── */
 
 .image-locations-grid {
