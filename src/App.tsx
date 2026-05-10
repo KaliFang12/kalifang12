@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { BrowserRouter, Link, Navigate, Route, Routes, useParams } from "react-router-dom";
 import { getProjectBySlug, projects } from "./data/projects";
 import {
@@ -56,19 +55,6 @@ function sortProjectsByDateDesc(projectArray: Array<any>) {
   });
 }
 
-function getProjectStatus(project: { startDate?: string; endDate?: string }) {
-  const end = project.endDate?.trim().toLowerCase();
-  if (!end || end === "present" || end === "ongoing" || end === "in progress") {
-    return "in-progress";
-  }
-
-  const parsedEnd = parseProjectDate(project.endDate);
-  if (parsedEnd === Infinity) {
-    return "in-progress";
-  }
-
-  return parsedEnd > Date.now() ? "in-progress" : "completed";
-}
 
 function formatProjectDateRange(project: { startDate?: string; endDate?: string }) {
   if (!project.startDate && !project.endDate) {
@@ -304,9 +290,7 @@ function HomePage() {
                 transition={{ duration: prefersReducedMotion ? 0.1 : 0.6, ease: EASING.default }}
                 aria-label={`Open dedicated page for ${project.title}`}
               >
-                {(project.slug === "slam-robot-navigation" || project.slug === "blood-pressure-monitor") && (
-                  <div className="project-card__badge">In Progress</div>
-                )}
+
                 <img
                   className="project-card__image"
                   src={asset(project.thumbnail)}
@@ -335,20 +319,24 @@ function HomePage() {
 
 function ProjectsPage() {
   const prefersReducedMotion = useReducedMotion();
-  const [projectFilter, setProjectFilter] = useState<"all" | "featured" | "in-progress" | "completed">("all");
 
-  const sortedProjects = sortProjectsByDateDesc(projects);
-
-  const filteredProjects = sortedProjects.filter((project) => {
-    if (projectFilter === "all") return true;
-    if (projectFilter === "featured") return Boolean(project.featured);
-    const status = getProjectStatus(project);
-    return status === projectFilter;
-  });
+  const filteredProjects = sortProjectsByDateDesc(projects);
 
   return (
     <>
       <Navigation />
+      <motion.header
+        className="hero"
+        initial="hidden"
+        animate="visible"
+        variants={slowReveal(prefersReducedMotion)}
+      >
+        <div className="hero__banner">
+          <img className="hero__banner-img" src={asset("project-hero.png")} alt="Projects hero" />
+          <div className="hero__banner-overlay" />
+          <h1 className="hero__banner-title">Projects</h1>
+        </div>
+      </motion.header>
       <main>
         <motion.section
           className="projects"
@@ -367,28 +355,10 @@ function ProjectsPage() {
             viewport={inViewOnce}
           >
             <h2 id="all-projects-title">All Projects</h2>
-            <p>Browse all projects with interactive sorting and status filtering!</p>
-            <div className="project-filter-controls">
-              <label htmlFor="project-filter">Filter:</label>
-              <select
-                id="project-filter"
-                value={projectFilter}
-                onChange={(e) => setProjectFilter(e.target.value as any)}
-              >
-                <option value="all">All</option>
-                <option value="featured">Featured</option>
-                <option value="in-progress">In Progress</option>
-                <option value="completed">Completed</option>
-              </select>
-            </div>
+            <p>Browse all of my projects!</p>
           </motion.div>
 
-          {filteredProjects.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '2rem 1rem', color: 'var(--muted)' }}>
-              No matching projects found for this filter.
-            </div>
-          ) : (
-            <motion.div
+          <motion.div
               className="project-grid"
               variants={staggerContainerFast(prefersReducedMotion)}
               initial="hidden"
@@ -406,9 +376,7 @@ function ProjectsPage() {
                   transition={{ duration: prefersReducedMotion ? 0.1 : 0.6, ease: EASING.default }}
                   aria-label={`Open dedicated page for ${project.title}`}
                 >
-                {(project.slug === "slam-robot-navigation" || project.slug === "blood-pressure-monitor") && (
-                  <div className="project-card__badge">In Progress</div>
-                )}
+
                 <img
                   className="project-card__image"
                   src={asset(project.thumbnail)}
@@ -423,7 +391,6 @@ function ProjectsPage() {
               </MotionLink>
             ))}
           </motion.div>
-          )}
         </motion.section>
       </main>
       <ContactBar />
@@ -437,6 +404,18 @@ function OtherPage() {
   return (
     <>
       <Navigation />
+      <motion.header
+        className="hero"
+        initial="hidden"
+        animate="visible"
+        variants={slowReveal(prefersReducedMotion)}
+      >
+        <div className="hero__banner">
+          <img className="hero__banner-img" src={asset("about-me-hero.png")} alt="About me hero" />
+          <div className="hero__banner-overlay" />
+          <h1 className="hero__banner-title">About Me</h1>
+        </div>
+      </motion.header>
       <main className="other-page">
         <motion.div
           className="other-content"
@@ -447,8 +426,6 @@ function OtherPage() {
           <Link className="back-link" to="/">
             ← Back to home
           </Link>
-
-          <h1 className="about-title">About Me</h1>
 
           <section className="content-section">
             <h2>To Do List:</h2>
