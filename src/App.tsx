@@ -165,7 +165,7 @@ function HomePage() {
               I'm currently a senior at Worcester Polytechnic Institute studying Mechanical Engineering
               with a minor in Robotics Engineering. I'm passionate about robotic systems and integrating
               hardware/software together with experience in embedded and controls systems. I'm currently
-              looking for full-time positions in fields for controls engineering!
+              looking for full-time positions in fields for firmware development, embedded systems, and robotics engineering!
             </p>
           </div>
         </motion.section>
@@ -741,21 +741,69 @@ function ProjectPage() {
                     elements.push(
                       <div key={`section-${i}`}>
                         <h3>{heading}</h3>
-                        {(() => {
-                          const contentElements: React.ReactNode[] = [];
-                          i++;
-                          while (i < lines.length && !lines[i].startsWith('## ')) {
-                            if (lines[i].trim()) {
-                              contentElements.push(<p key={`p-${i}`}>{lines[i]}</p>);
-                            } else {
-                              contentElements.push(<br key={`br-${i}`} />);
-                            }
-                            i++;
-                          }
-                          i--;
-                          return contentElements;
-                        })()}
-                        <img src={asset('frontier-exploration.png')} alt="Frontier exploration map" className="bp-block-diagram" />
+                        <div className="project-detail__section-with-image" style={{ marginTop: '1rem' }}>
+                          <div className="mapping-images">
+                            <img src={asset('frontier-exploration.png')} alt="Frontier exploration map" className="mapping-img" />
+                            <img src={asset('large-map-exploration.png')} alt="Large map exploration" className="mapping-img" />
+                          </div>
+                          <div className="project-detail__text-content">
+                            {(() => {
+                              const contentElements: React.ReactNode[] = [];
+                              i++;
+                              while (i < lines.length && !lines[i].startsWith('## ')) {
+                                if (lines[i].trim()) {
+                                  contentElements.push(<p key={`p-${i}`}>{lines[i]}</p>);
+                                } else {
+                                  contentElements.push(<br key={`br-${i}`} />);
+                                }
+                                i++;
+                              }
+                              i--;
+                              return contentElements;
+                            })()}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  } else if (heading === 'Navigation' && project.slug === 'slam-robot-navigation') {
+                    const navImages: Record<string, { src: string; alt: string }> = {
+                      'Environment Mapping & Visualization': { src: '2DOccupancyGrid.png', alt: 'Occupancy grid' },
+                      'Obstacle Inflation & Collision Prevention': { src: 'Grid-with-padding.png', alt: 'Grid with padding' },
+                      'Path Planning & Autonomous Navigation': { src: 'Grid-with-visibility.png', alt: 'Grid with visibility' },
+                    };
+                    const navContent: React.ReactNode[] = [];
+                    let subTitle = '';
+                    let subLines: string[] = [];
+                    const flushSub = (key: string) => {
+                      if (!subTitle) return;
+                      const img = navImages[subTitle];
+                      navContent.push(
+                        <div key={key} className="project-detail__section-with-image">
+                          {img && <img src={asset(img.src)} alt={img.alt} className="project-detail__inline-image project-detail__inline-image--nav" />}
+                          <div className="project-detail__text-content">
+                            <h4 className="nav-subsection-title">{subTitle}</h4>
+                            {subLines.filter(l => l.trim()).map((l, idx) => <p key={idx}>{l}</p>)}
+                          </div>
+                        </div>
+                      );
+                    };
+                    i++;
+                    while (i < lines.length && !lines[i].startsWith('## ')) {
+                      if (lines[i].startsWith('### ')) {
+                        flushSub(`sub-${i}`);
+                        subTitle = lines[i].substring(4);
+                        subLines = [];
+                      } else {
+                        subLines.push(lines[i]);
+                      }
+                      i++;
+                    }
+                    flushSub(`sub-end`);
+                    i--;
+                    elements.push(
+                      <div key={`section-${i}`}>
+                        <h3>{heading}</h3>
+                        {navContent}
                       </div>
                     );
                   } else {

@@ -388,7 +388,7 @@ img {
 
 .project-detail__description h3 {
   color: var(--text);
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   margin: 2em 0 0.4em;
   text-indent: 0;
@@ -409,6 +409,10 @@ img {
   flex-shrink: 0;
 }
 
+.project-detail__inline-image--nav {
+  width: 300px;
+}
+
 .project-detail__text-content {
   flex: 1;
 }
@@ -416,6 +420,19 @@ img {
 .project-detail__text-content h3 {
   margin-top: 0;
   margin-bottom: 0.5em;
+}
+
+.nav-subsection-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.4em;
+  color: var(--text);
+}
+
+@media (max-width: 600px) {
+  .project-detail__inline-image--nav {
+    width: 100%;
+  }
 }
 
 .project-detail__media-wrap {
@@ -579,6 +596,26 @@ img {
 
 .additional-image--small {
   max-width: 200px;
+}
+
+.mapping-images {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  width: 280px;
+}
+
+.mapping-img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+@media (max-width: 600px) {
+  .mapping-images {
+    width: 100%;
+  }
 }
 
 .bp-block-diagram {
