@@ -490,7 +490,7 @@ function ResumePage() {
           {/* Resume Section */}
           <section className="content-section">
             <div className="resume-container">
-              <embed src={asset("kali-fang-resume.pdf")} type="application/pdf" className="resume-image" />
+              <embed src={asset("kali_fang_resume.pdf")} type="application/pdf" className="resume-image" />
             </div>
           </section>
         </motion.div>
