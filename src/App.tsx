@@ -162,8 +162,8 @@ function HomePage() {
           <div className="intro__inner">
             <img src={asset("Myself.jpg")} alt="Kali Fang" className="intro__photo" />
             <p className="intro__blurb">
-              I'm currently a senior at Worcester Polytechnic Institute studying Mechanical Engineering
-              with a minor in Robotics Engineering. I'm passionate about robotic systems and integrating
+              I'm a recent graduate at Worcester Polytechnic Institute with a Bachelor's Degree in Mechanical 
+              Engineering and a minor in Robotics Engineering. I'm passionate about robotic systems and integrating
               hardware/software together with experience in embedded and controls systems. I'm currently
               looking for full-time positions in fields for firmware development, embedded systems, and robotics engineering!
             </p>
