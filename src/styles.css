@@ -638,6 +638,19 @@ img {
   border-radius: var(--radius);
 }
 
+.iteration-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .iteration-images {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 600px) {
   .bp-graphs {
     grid-template-columns: 1fr;

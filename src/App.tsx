@@ -713,6 +713,32 @@ function ProjectPage() {
                         })()}
                       </div>
                     );
+                  } else if (heading === 'Physical Design' && project.slug === 'blood-pressure-monitor') {
+                    elements.push(
+                      <div key={`section-${i}`}>
+                        <h3>{heading}</h3>
+                        {(() => {
+                          const contentElements: React.ReactNode[] = [];
+                          i++;
+                          while (i < lines.length && !lines[i].startsWith('## ')) {
+                            if (lines[i].trim()) {
+                              contentElements.push(<p key={`p-${i}`}>{lines[i]}</p>);
+                            } else {
+                              contentElements.push(<br key={`br-${i}`} />);
+                            }
+                            i++;
+                          }
+                          i--;
+                          return contentElements;
+                        })()}
+                        <h3>Iteration Testing</h3>
+                        <div className="iteration-images">
+                          {(project.iterationImages ?? []).map((img, idx) => (
+                            <img key={idx} src={asset(img)} alt={`Iteration testing ${idx + 1}`} className="bp-graph-img" />
+                          ))}
+                        </div>
+                      </div>
+                    );
                   } else if (heading === 'Data Collection' && project.slug === 'blood-pressure-monitor') {
                     elements.push(
                       <div key={`section-${i}`}>
